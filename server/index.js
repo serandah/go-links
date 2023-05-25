@@ -103,7 +103,7 @@ app.get("/:shortcut", (req, res) => {
   const { shortcut } = req.params;
   const link = getLinkFromShortcut(shortcut);
   if (link) {
-    res.redirect(link);
+    res.redirect(link.url);
   } else {
     res.status(404).send("Shortcut not found.");
   }
@@ -121,8 +121,7 @@ function validateUrl(url) {
 
 // Helper function to retrieve a link from the JSON file
 function getLinkFromShortcut(shortcut) {
-  const link = links.find((item) => item.shortcut === shortcut);
-  return link ? link.url : null;
+  return links.find((item) => item.shortcut === shortcut);
 }
 
 // Helper function to save the links to the JSON file
